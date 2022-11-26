@@ -1,0 +1,16 @@
+{
+    "name": "furan917/basic_coding_standard",
+    "description": "Basic Coding Standard for Magento",
+    "type": "metapackage",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Furan917\\BasicCodingStandard\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "magento/magento-coding-standard": "v25"
+
+    }
+}
