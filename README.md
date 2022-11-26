@@ -2,7 +2,7 @@
 
 ## How to use code style tools in module?
 
-- Copy action in .github to your own module + update env ${{ secrets.PHP_VERSION_CODE_QUALITY }}
+- Copy the basic-coding-standard action in the .github to your own module + update the env ${{ secrets.PHP_VERSION_CODE_QUALITY }}
 - create a PR in your module and watch it work
 
 ## This currently includes 2 basic rulessets, Rector & PHPCS
