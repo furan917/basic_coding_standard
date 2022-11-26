@@ -1,0 +1,39 @@
+name: Basic Coding Standards
+
+on:
+  pull_request:
+    paths:
+      - "**.php"
+      - "**.phtml"
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    env:
+      PHP_VERSION_CODE_QUALITY: ${{ secrets.PHP_VERSION_CODE_QUALITY }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ secrets.PHP_VERSION_CODE_QUALITY }}
+          tools: composer:v2
+
+      - name: Install Basic Coding Standard
+        run: git clone https://github.com/furan917/basic_coding_standard.git && cd basic_coding_standard && composer install && cd ..
+
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: Run Rector
+        run: cp -r basic_coding_standard/src/rector.php rector.php && basic_coding_standard/vendor/bin/rector process --ansi --no-progress-bar --dry-run ${{ steps.files.outputs.added_modified }}
+
+      - name: Run Phpcs
+        uses: tinovyatkin/action-php-codesniffer@v1
+        with:
+          files: "**"
+          scope: files
+          phpcs_path: basic_coding_standard/vendor/bin/phpcs --ignore=basic_coding_standard/
+          standard: basic_coding_standard/src/ruleset.xml
