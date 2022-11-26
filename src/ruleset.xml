@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Basic-Mage2">
+    <description>Basic Coding Standard</description>
+    <!-- exclude sub vendor folder -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- exclude node_modules folder -->
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <!-- exclude git -->
+    <exclude-pattern>*/.git/*</exclude-pattern>
+
+    <rule ref="PSR12" />
+
+    <rule ref="./../vendor/phpcompatibility/php-compatibility/PHPCompatibility">
+        <exclude name="PHPCompatibility.FunctionUse.RequiredToOptionalFunctionParameters"/>
+        <exclude name="PHPCompatibility.ParameterValues.RemovedPCREModifiers"/>
+        <exclude name="PHPCompatibility.InitialValue.NewConstantScalarExpressions"/>
+        <exclude name="PHPCompatibility.Lists.NewKeyedList" />
+    </rule>
+
+    <rule ref="./../vendor/magento/magento-coding-standard/Magento2" >
+        <exclude name="Magento2.Annotation.MethodAnnotationStructure" />
+        <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting.Missing" />
+    </rule>
+</ruleset>
