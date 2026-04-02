@@ -62,20 +62,12 @@ return static function (RectorConfig $rectorConfig): void {
 
     $phpVersion = getenv('PHP_VERSION_CODE_QUALITY');
 
-    switch ($phpVersion) {
-        default:
-        case '7.4':
-            $setsArray[] = LevelSetList::UP_TO_PHP_74;
-            break;
-        case '8.0':
-            $setsArray[] = LevelSetList::UP_TO_PHP_80;
-            break;
-        case '8.1':
-            $setsArray[] = LevelSetList::UP_TO_PHP_81;
-            break;
-        case '8.2':
-            $setsArray[] = LevelSetList::UP_TO_PHP_82;
-            break;
+    $levelSetConstant = 'UP_TO_PHP_' . str_replace('.', '', $phpVersion);
+
+    if (defined(LevelSetList::class . '::' . $levelSetConstant)) {
+        $setsArray[] = constant(LevelSetList::class . '::' . $levelSetConstant);
+    } else {
+        $setsArray[] = LevelSetList::UP_TO_PHP_84;
     }
 
     $rectorConfig->sets($setsArray);

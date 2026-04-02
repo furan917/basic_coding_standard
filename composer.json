@@ -10,7 +10,12 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "magento/magento-coding-standard": "v25"
+        "magento/magento-coding-standard": "v40"
 
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

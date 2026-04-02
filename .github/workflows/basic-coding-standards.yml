@@ -12,7 +12,7 @@ jobs:
     env:
       PHP_VERSION_CODE_QUALITY: ${{ secrets.PHP_VERSION_CODE_QUALITY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -25,10 +25,10 @@ jobs:
         run: git clone https://github.com/furan917/basic_coding_standard.git && cd basic_coding_standard && composer install && cd ..
 
       - id: files
-        uses: jitterbit/get-changed-files@v1
+        uses: step-security/changed-files@v47
 
       - name: Run Rector
-        run: cp -r basic_coding_standard/src/rector.php rector.php && basic_coding_standard/vendor/bin/rector process --ansi --no-progress-bar --dry-run ${{ steps.files.outputs.added_modified }}
+        run: cp -r basic_coding_standard/src/rector.php rector.php && basic_coding_standard/vendor/bin/rector process --ansi --no-progress-bar --dry-run ${{ steps.files.outputs.all_changed_files }}
 
       - name: Run Phpcs
         uses: tinovyatkin/action-php-codesniffer@v1
