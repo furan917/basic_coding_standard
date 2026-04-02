@@ -11,7 +11,6 @@
     "minimum-stability": "dev",
     "require": {
         "magento/magento-coding-standard": "v40"
-
     },
     "config": {
         "allow-plugins": {
